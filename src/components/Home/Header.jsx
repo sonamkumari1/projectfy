@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <div className="w-full max-w-screen-xl mx-auto mt-5 border border-white/16 rounded-full bg-white/8 backdrop-blur-md px-8 py-1 flex items-center justify-between">
@@ -7,7 +9,7 @@ const Header = () => {
       </div>
 
       <div className="flex items-center justify-center gap-5">
-        <button className="text-zinc-100 rounded-full px-5 py-1.5 bg-zinc-900 font-medium text-lg flex items-center transition border border-zinc-700 relative overflow-hidden group">
+        <Link to="/login" className="text-zinc-100 rounded-full px-5 py-1.5 bg-zinc-900 font-medium text-lg flex items-center transition border border-zinc-700 relative overflow-hidden group">
           login
           <svg
             className="inline-block ml-2 group-hover:translate-x-2 transition duration-1000"
@@ -22,7 +24,7 @@ const Header = () => {
             />
           </svg>
           <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-3 bg-zinc-100 blur-[18px] group-hover:scale-[3] opacity-0 group-hover:opacity-100 transition duration-1000" />
-        </button>
+        </Link>
       </div>
     </div>
   );
