@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import { ToastContainer } from "react-toastify";
+import AddSellerForm from "./sell/AddSellerForm";
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+
+      {/* seller */}
+      <Route path="/sellerform" element={<AddSellerForm />} />
     </Routes>
      <ToastContainer />
     </>

@@ -3,11 +3,13 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from 'dotenv'
 import userApi from "./router/user.router.js"
+import sellerRoutes from "./router/seller.router.js"
 
 dotenv.config()
 const app = express();
 
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 app.use(cors());
 
 
@@ -19,6 +21,7 @@ mongoose
   .catch((err) => console.log(err));
 
   app.use('/api/auth', userApi)
+  app.use("/api/seller", sellerRoutes);
 
 const PORT = 4000;
 
