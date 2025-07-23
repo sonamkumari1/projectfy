@@ -46,6 +46,15 @@ const sellerViewSchema = new mongoose.Schema(
       enum: ["college", "experts", "domain"],
       default: [],
     },
+    frontend: {
+      type:String,
+    },
+    backend: {
+      type: String,
+    },
+    database: {
+      type: String,
+    },
 
     github: {
       type: String,

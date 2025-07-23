@@ -1,60 +1,60 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AddSellerForm() {
-  const { search } = useLocation();
-  const domainFromQuery = new URLSearchParams(search).get("domain")?.toLowerCase() || "";
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     price: "",
     discountPer: "",
     rating: "",
     desc: "",
-    domaincategory: domainFromQuery,
+    domaincategory: "",
     category: "",
     github: "",
+    frontend: "",
+    backend: "",
+    database: "",
   });
   const [photo, setPhoto] = useState(null);
   const [video, setVideo] = useState(null);
-
-  useEffect(() => {
-    setFormData((prev) => ({ ...prev, domaincategory: domainFromQuery }));
-  }, [domainFromQuery]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const form = new FormData();
-  form.append("title", formData.title);
-  form.append("price", formData.price);
-  form.append("discountPer", formData.discountPer);
-  form.append("rating", formData.rating);
-  form.append("desc", formData.desc);
-  form.append("domaincategory", formData.domaincategory);
-  form.append("category", formData.category);
-  form.append("github", formData.github);
-  if (photo) form.append("photo", photo);
-  if (video) form.append("video", video);
+    const form = new FormData();
+    form.append("title", formData.title);
+    form.append("price", formData.price);
+    form.append("discountPer", formData.discountPer);
+    form.append("rating", formData.rating);
+    form.append("desc", formData.desc);
+    form.append("domaincategory", formData.domaincategory);
+    form.append("category", formData.category);
+    form.append("github", formData.github);
+    form.append("frontend", formData.frontend);
+    form.append("backend", formData.backend);
+    form.append("database", formData.database);
+    if (photo) form.append("photo", photo);
+    if (video) form.append("video", video);
 
-  try {
-    const res = await axios.post(
-      "http://localhost:4000/api/seller/selleradd",
-      form
-    );
-    console.log(res.data);
-    alert("Seller Added Successfully");
-  } catch (error) {
-    console.error(error);
-    alert("Failed to submit");
-  }
-};
-
+    try {
+      const res = await axios.post(
+        "http://localhost:4000/api/seller/selleradd",
+        form
+      );
+      console.log(res.data);
+      alert("Seller Added Successfully");
+      navigate("/seller/dashboard");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to submit");
+    }
+  };
 
   return (
     <div className="min-h-screen py-20 flex items-center justify-center bg-black">
@@ -113,13 +113,47 @@ const handleSubmit = async (e) => {
           onChange={handleChange}
         ></textarea>
 
-        <input
-          className="w-full p-3 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 cursor-not-allowed"
-          type="text"
+        <textarea
+          className="w-full p-3 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          placeholder="Frontend Description"
+          name="frontend"
+          value={formData.frontend}
+          onChange={handleChange}
+        ></textarea>
+        <textarea
+          className="w-full p-3 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          placeholder="Backend Description"
+          name="backend"
+          value={formData.backend}
+          onChange={handleChange}
+        ></textarea>
+        <textarea
+          className="w-full p-3 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          placeholder="Database Description"
+          name="database"
+          value={formData.database}
+          onChange={handleChange}
+        ></textarea>
+
+        <select
           name="domaincategory"
           value={formData.domaincategory}
-          readOnly
-        />
+          onChange={handleChange}
+          className="w-full p-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2"
+          required
+        >
+          <option value="" disabled>
+            Select Domain Category
+          </option>
+          <option value="web development">Web Development</option>
+          <option value="mobile developement">Mobile Development</option>
+          <option value="game development">Game Development</option>
+          <option value="data science projects">Data Science Projects</option>
+          <option value="c++ projects">C++ Projects</option>
+          <option value="python projects">Python Projects</option>
+          <option value="java projects">Java Projects</option>
+          <option value="c projects">C Projects</option>
+        </select>
 
         <select
           name="category"

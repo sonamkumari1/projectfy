@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import { addSeller } from "../controller/sellerController.js";
+import { addSeller, deleteSeller, getallSeller, getSellerById, updateSeller, getSellerByCategory } from "../controller/sellerController.js";
 
 const router = express.Router();
 
@@ -23,5 +23,15 @@ router.post(
   ]),
   addSeller
 );
+
+router.get("/", getallSeller)
+router.get("/:id", getSellerById)
+
+router.put("/update/:id", upload.fields([{name: "photo", maxCount:1}, {name: "video", maxCount: 1}]),
+updateSeller
+)
+
+router.delete("/delete/:id", deleteSeller)
+router.get("/category/:category", getSellerByCategory);
 
 export default router;

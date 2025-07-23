@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-
+import { FiUpload } from "react-icons/fi";
 
 function ProjectDashboard() {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col items-center justify-center px-10 pt-10 pb-20 bg-black gap-24">
-      <div className="relative w-full max-w-screen-xl mx-auto mt-5 border border-gray-800 shadow-xl shadow-gray-900 rounded-xl bg-white/7 backdrop-blur-md px-8 py-20 hover:shadow-[0_0_20px_rgba(0,0,0,0.7)] ">
+      <div className="relative w-full max-w-screen-xl mx-auto mt-5 border border-gray-800 shadow-xl shadow-gray-900 rounded-xl bg-white/7 backdrop-blur-md px-8 pb-10 pt-20 hover:shadow-[0_0_20px_rgba(0,0,0,0.7)] ">
         <h1 className="text-5xl font-extrabold text-white mb-4 text-center leading-tight">
           Selling Projects
         </h1>
@@ -53,8 +53,7 @@ function ProjectDashboard() {
           ].map((item, index) => (
             <div
               key={index}
-              onClick={()=> navigate(`/sellerform?domain=${encodeURIComponent(item.title)}`)}
-              className="relative group bg-gray-800 rounded-lg border border-gray-900 shadow-md shadow-gray-700 cursor-pointer overflow-hidden w-64 h-48 mx-auto transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-1"
+              className="relative group mb-3 bg-gray-800 rounded-lg border border-gray-900 shadow-md shadow-gray-700 cursor-pointer overflow-hidden w-64 h-48 mx-auto transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-1"
             >
               <div className="w-full h-full">
                 <img
@@ -71,6 +70,12 @@ function ProjectDashboard() {
             </div>
           ))}
         </div>
+        <button
+          onClick={() => navigate("/sellerform")}
+          className="mt-10 w-full py-3 bg-zinc-950 text-white border border-gray-800 rounded-full hover:bg-gray-700 shadow-2xl transition flex items-center justify-center gap-4"
+        >
+          Upload Your Projects <FiUpload />
+        </button>
       </div>
 
       <div className="w-full max-w-screen-xl mx-auto py-10 bg-black text-white px-5">
@@ -96,7 +101,7 @@ function ProjectDashboard() {
             <p className="text-gray-400 mb-6">
               Explore College Specific Projects
             </p>
-            <button className="text-zinc-100 rounded-full px-5 py-1.5 mb-4 bg-zinc-900 font-medium text-lg flex items-center transition border border-zinc-700 relative overflow-hidden group">
+            <button onClick={() => navigate("/projects/college")} className="text-zinc-100 rounded-full px-5 py-1.5 mb-4 bg-zinc-900 font-medium text-lg flex items-center transition border border-zinc-700 relative overflow-hidden group">
               Explore....
             </button>
           </div>
@@ -113,7 +118,7 @@ function ProjectDashboard() {
             <p className="text-gray-400 mb-6">
               Explore Company&Experts Specific Projects.
             </p>
-            <button className="text-zinc-100 rounded-full px-5 py-1.5 bg-zinc-900 font-medium text-lg flex items-center transition border border-zinc-700 relative overflow-hidden group">
+            <button onClick={() => navigate("/projects/experts")} className="text-zinc-100 rounded-full px-5 py-1.5 bg-zinc-900 font-medium text-lg flex items-center transition border border-zinc-700 relative overflow-hidden group">
               Explore....
             </button>
           </div>
@@ -130,39 +135,40 @@ function ProjectDashboard() {
             <p className="text-gray-400 mb-6">
               Explore Domain Specific Projects.
             </p>
-            <button className="text-zinc-100 rounded-full px-5 py-1.5 bg-zinc-900 font-medium text-lg flex items-center transition border border-zinc-700 relative overflow-hidden group">
+            <button onClick={() => navigate("/projects/domain")} className="text-zinc-100 rounded-full px-5 py-1.5 bg-zinc-900 font-medium text-lg flex items-center transition border border-zinc-700 relative overflow-hidden group">
               Explore....
             </button>
           </div>
         </div>
       </div>
 
-    <div className="relative w-full max-w-screen-xl mx-auto mt-5 border border-gray-800 shadow-xl shadow-gray-900 rounded-xl bg-white/5 backdrop-blur-md px-8 py-20 hover:shadow-[0_0_20px_rgba(0,0,0,0.7)]">
-  <div className="flex flex-col md:flex-row items-center justify-between w-full gap-10">
-    {/* Left side: Text */}
-    <div className="flex-1">
-      <h1 className="text-5xl font-extrabold text-white mb-4 leading-tight">
-        Share Your Idea for Project
-      </h1>
-      <p className="text-gray-300 mb-6">
-        Got a unique project idea? Share it with us and let us help you turn it into a successful business opportunity. Collaborate, innovate, and create with confidence.
-      </p>
-      <button className="px-6 py-3 bg-zinc-900 text-white rounded-full hover:bg-purple-700 transition">
-        Share Your Idea
-      </button>
-    </div>
+      <div className="relative w-full max-w-screen-xl mx-auto mt-5 border border-gray-800 shadow-xl shadow-gray-900 rounded-xl bg-white/5 backdrop-blur-md px-8 py-20 hover:shadow-[0_0_20px_rgba(0,0,0,0.7)]">
+        <div className="flex flex-col md:flex-row items-center justify-between w-full gap-10">
+          {/* Left side: Text */}
+          <div className="flex-1">
+            <h1 className="text-5xl font-extrabold text-white mb-4 leading-tight">
+              Share Your Idea for Project
+            </h1>
+            <p className="text-gray-300 mb-6">
+              Got a unique project idea? Share it with us and let us help you
+              turn it into a successful business opportunity. Collaborate,
+              innovate, and create with confidence.
+            </p>
+            <button className="px-6 py-3 bg-zinc-900 text-white rounded-full hover:bg-purple-700 transition">
+              Share Your Idea
+            </button>
+          </div>
 
-    {/* Right side: Image */}
-    <div className="flex-1 flex justify-center">
-      <img
-        src="/ideas.png"
-        alt="Share Your Idea"
-        className="rounded-lg shadow-lg w-[550px] h-auto"
-      />
-    </div>
-  </div>
-</div>
-
+          {/* Right side: Image */}
+          <div className="flex-1 flex justify-center">
+            <img
+              src="/ideas.png"
+              alt="Share Your Idea"
+              className="rounded-lg shadow-lg w-[550px] h-auto"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
