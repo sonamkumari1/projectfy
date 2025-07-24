@@ -46,7 +46,7 @@ function ViewProjects() {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/seller/${id}`);
+        const res = await axios.get(`http://localhost:4000/api/project/${id}`);
         setProject(res.data.data);
       } catch (error) {
         console.error("Failed to fetch project", error);

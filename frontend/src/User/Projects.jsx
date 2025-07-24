@@ -13,11 +13,11 @@ function Projects() {
     const fetchProjects = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:4000/api/seller/category/${category}`
+          `http://localhost:4000/api/project/category/${category}`
         );
         setProjects(res.data.data);
       } catch (error) {
-        console.error("Failed to fetch sellers", error);
+        console.error("Failed to fetch projects", error);
       }
     };
     fetchProjects();

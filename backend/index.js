@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from 'dotenv'
 import userApi from "./router/user.router.js"
-import sellerRoutes from "./router/seller.router.js"
+import projectRoutes from "./router/project.router.js"
 
 dotenv.config()
 const app = express();
@@ -14,14 +14,13 @@ app.use(cors());
 
 
 mongoose
-  .connect(
-    "mongodb+srv://sonamkumari63928:DhHnqbKSIyBxhA1U@cluster0.btmxgp7.mongodb.net/projectify"
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("mongodb connected"))
   .catch((err) => console.log(err));
 
   app.use('/api/auth', userApi)
-  app.use("/api/seller", sellerRoutes);
+  app.use("/api/project", projectRoutes);
 
 const PORT = 4000;
 

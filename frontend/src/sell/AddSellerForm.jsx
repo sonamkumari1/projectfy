@@ -44,11 +44,11 @@ function AddSellerForm() {
 
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/seller/selleradd",
+        "http://localhost:4000/api/project/projectadd",
         form
       );
       console.log(res.data);
-      alert("Seller Added Successfully");
+      alert("project Added Successfully");
       navigate("/seller/dashboard");
     } catch (error) {
       console.error(error);

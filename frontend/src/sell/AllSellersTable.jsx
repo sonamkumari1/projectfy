@@ -2,37 +2,37 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function AllSellersTable() {
-  const [sellers, setSellers] = useState([]);
-  const [editingSeller, setEditingSeller] = useState(null);
+  const [projects, setProjects] = useState([]);
+  const [editingProject, setEditingProject] = useState(null);
   const [editData, setEditData] = useState({});
 
   useEffect(() => {
-    fetchSellers();
+    fetchProjects();
   }, []);
 
-  const fetchSellers = async () => {
+  const fetchProjects = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/seller");
-      setSellers(res.data.data);
+      const res = await axios.get("http://localhost:4000/api/project");
+      setProjects(res.data.data);
     } catch (error) {
-      console.error("Error fetching sellers:", error);
+      console.error("Error fetching Projects:", error);
     }
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this seller?")) return;
+    if (!window.confirm("Are you sure you want to delete this Project?")) return;
     try {
-      await axios.delete(`http://localhost:4000/api/seller/delete/${id}`);
-      setSellers((prev) => prev.filter((item) => item._id !== id));
+      await axios.delete(`http://localhost:4000/api/project/delete/${id}`);
+      setProjects((prev) => prev.filter((item) => item._id !== id));
     } catch (error) {
       console.error("Delete error:", error);
       alert("Failed to delete");
     }
   };
 
-  const handleEditClick = (seller) => {
-    setEditingSeller(seller);
-    setEditData(seller);
+  const handleEditClick = (project) => {
+    setEditingProject(project);
+    setEditData(project);
   };
 
   const handleEditChange = (e) => {
@@ -76,11 +76,11 @@ function AllSellersTable() {
         formData.append("video", editData.video);
       }
       await axios.put(
-        `http://localhost:4000/api/seller/update/${editingSeller._id}`,
+        `http://localhost:4000/api/project/update/${editingProject._id}`,
         formData
       );
-      setEditingSeller(null);
-      fetchSellers();
+      setEditingProject(null);
+      fetchProjects();
     } catch (error) {
       console.error("Edit error:", error);
       alert("Failed to update");
@@ -91,7 +91,7 @@ function AllSellersTable() {
     <div className="min-h-screen bg-black py-20 px-4 flex justify-center">
       <div className="w-full max-w-7xl overflow-x-auto bg-gray-900/90 rounded-xl shadow-2xl p-6">
         <h2 className="text-3xl text-white font-bold mb-6 text-center">
-          All Sellers
+          All Projects
         </h2>
 
         <table className="w-full table-auto text-left text-sm text-white border border-gray-800">
@@ -109,7 +109,7 @@ function AllSellersTable() {
             </tr>
           </thead>
           <tbody>
-            {sellers.map((item) => (
+            {projects.map((item) => (
               <tr key={item._id} className="hover:bg-gray-800/60">
                 <td className="p-3 border-b border-gray-700">
                   {item.photo && (
@@ -161,19 +161,19 @@ function AllSellersTable() {
           </tbody>
         </table>
 
-        {sellers.length === 0 && (
+        {projects.length === 0 && (
           <p className="text-gray-400 text-center mt-6">
-            No sellers added yet.
+            No projects added yet.
           </p>
         )}
       </div>
 
       {/* Edit Modal */}
-      {editingSeller && (
+      {editingProject && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-start overflow-y-auto py-10 z-50">
           <div className="bg-gray-900 p-6 rounded-lg w-full max-w-md">
             <h3 className="text-xl font-bold mb-4 text-white text-center">
-              Edit Seller
+              Edit project
             </h3>
             <form onSubmit={handleEditSubmit} className="space-y-4">
               <input
@@ -295,7 +295,7 @@ function AllSellersTable() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setEditingSeller(null)}
+                  onClick={() => setEditingProject(null)}
                   className="bg-gray-600 px-4 py-2 rounded text-white"
                 >
                   Cancel
